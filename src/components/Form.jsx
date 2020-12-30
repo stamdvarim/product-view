@@ -46,7 +46,7 @@ const Form = () => {
     }
 
     const calculatePersons = () => {
-        if (setGuardTime <= 0) {
+        if (guardTime <= 0) {
             return alert("please enter number above 0");
         }
         setGuardsView(calculateGuards(persons, startDate, endDate, guardTime, minuteHour));
