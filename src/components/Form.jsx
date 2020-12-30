@@ -11,7 +11,6 @@ const Form = () => {
     const [guardTime, setGuardTime] = useState(1);
     const [guardsView, setGuardsView] = useState([]);
     const [minuteHour, setMinuteHour] = useState("hour");
-    console.log(minuteHour);
 
     const peronNameRef = useRef(null);
 
@@ -33,16 +32,9 @@ const Form = () => {
     }
 
     const handleKeyDown = (e) => {
-        if (e.key === 'Enter') {
+        if (e.key === 'Enter' || e.keyCode === 13 || e.which === 13) {
             addToPersons();
         }
-    }
-
-    const setGuardTimeFunction = (value) => {
-        if (value <= 0) {
-            return alert("interval have to be bigger than 0");
-        }
-        setGuardTime(value);
     }
 
     const deletePerson = (index) => {
@@ -54,6 +46,9 @@ const Form = () => {
     }
 
     const calculatePersons = () => {
+        if (setGuardTime <= 0) {
+            return alert("please enter number above 0");
+        }
         setGuardsView(calculateGuards(persons, startDate, endDate, guardTime, minuteHour));
     }
 
@@ -82,7 +77,7 @@ const Form = () => {
                 <div>
                     <label>
                         Guard Time
-                    <input type="number" value={guardTime} onChange={(e) => setGuardTimeFunction(e.target.value)} />
+                    <input type="number" value={guardTime} onChange={(e) => setGuardTime(e.target.value)} />
                         <select onChange={(e) => setMinuteHour(e.target.value)} name="cars" id="cars">
                             <option value="hour">Hour</option>
                             <option value="minute">Minute</option>
