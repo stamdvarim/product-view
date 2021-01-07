@@ -1,29 +1,30 @@
 import React, { useState, useRef } from 'react';
 //algo
-import { calculateGuards } from './calculator';
+import { calculateGuards } from '../algo/calculator';
 //time lib
 import moment from 'moment';
 //material libs
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
-import AddCircleIcon from '@material-ui/icons/AddCircle'; import Grid from '@material-ui/core/Grid';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import ExposureIcon from '@material-ui/icons/Exposure';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import Select from 'react-select';
 import CardActions from '@material-ui/core/CardActions';
+
+//mine components 
+import { Time } from './Time';
+import { AddGuard } from './AddGuard';
+import { GuardTime } from './GuardTime';
 
 
 const Form = () => {
 
-//..............................................................................................
+    //..............................................................................................
     //useStyle
-//..............................................................................................
-const useStylesButtonIcon = makeStyles((theme) => ({
+    //..............................................................................................
+    const useStylesButtonIcon = makeStyles((theme) => ({
         button: {
             margin: theme.spacing(1),
         },
@@ -54,29 +55,17 @@ const useStylesButtonIcon = makeStyles((theme) => ({
             },
         },
     }));
-    const useStylesDateInput = makeStyles((theme) => ({
-        container: {
-            display: 'flex',
-            flexWrap: 'wrap',
-        },
-        textField: {
-            marginLeft: theme.spacing(1),
-            marginRight: theme.spacing(1),
-            width: 200,
-        },
-    }));
-    
-//..............................................................................................
+
+    //..............................................................................................
     //classes
-//..............................................................................................
+    //..............................................................................................
     const classesSend = useStylesButtonIcon();
     const classes = useStylesCard();
     const classesButton = useStylesButton();
-    const classesDateInput = useStylesDateInput();
 
-//..............................................................................................
-    //seting Time
-//..............................................................................................
+    //..............................................................................................
+    //setting Time
+    //..............................................................................................
     const now = new Date();
     const year = now.getFullYear();
     const month = now.getMonth().toString().length === 1 ? '0' + (now.getMonth() + 1).toString() : now.getMonth() + 1;
@@ -90,9 +79,9 @@ const useStylesButtonIcon = makeStyles((theme) => ({
 
     const formattedDateTimeEnd = year + '-' + month + '-' + dateEnd + 'T' + hours + ':' + minutes;
 
-//..............................................................................................
-// use state
-//..............................................................................................
+    //..............................................................................................
+    // use state
+    //..............................................................................................
 
     const [persons, setPersons] = useState([]);
     const [currentPersonName, setCurrentPersonName] = useState("");
@@ -103,19 +92,10 @@ const useStylesButtonIcon = makeStyles((theme) => ({
     const [minuteHour, setMinuteHour] = useState("hour");
     const [isCalculateClicked, setisCalculateClicked] = useState(false);
     const [isPersonAdd, setIsPersonAdd] = useState(false);
-    const [options] = useState([
-        { value: 'hour', label: 'HOUR' },
-        { value: 'minute', label: 'MINUTE' },
-    ]);
-//..............................................................................................
-    //use ref 
-//..............................................................................................
 
-    const peronNameRef = useRef(null);
-
-//..............................................................................................
+    //..............................................................................................
     //function
-//..............................................................................................
+    //..............................................................................................
 
     // track houre minute selector 
     const handleChange = selectedOption => {
@@ -124,13 +104,11 @@ const useStylesButtonIcon = makeStyles((theme) => ({
 
     //track person name
     const onChangePersonName = (e) => {
-        const personName = e.target.value;
-        setCurrentPersonName(currentPersonName => personName);
+        setCurrentPersonName(e.target.value);
     }
 
     //add person by push add button
     const addToPersons = () => {
-        setIsPersonAdd(true)
         if (!currentPersonName || !currentPersonName.trimStart().trimEnd()) {
             return alert("please enter a valid person name");
         }
@@ -139,7 +117,7 @@ const useStylesButtonIcon = makeStyles((theme) => ({
         }
         setPersons(persons => [...persons, currentPersonName]);
         setCurrentPersonName("");
-        peronNameRef.current.focus();
+        setIsPersonAdd(true)
     }
 
     //using enter to add person
@@ -177,77 +155,30 @@ const useStylesButtonIcon = makeStyles((theme) => ({
     return (
         <div>
             <form>
-                <form className={classesDateInput.container} noValidate>
-                    <TextField
-                        id="datetime-local"
-                        label="Start Date"
-                        type="datetime-local"
-                        onChange={(e) => setStartDate(e.target.value)}
-                        value={startDate}
-                        className={classesDateInput.textField}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
+                <Time
+                    onChangeStartTime={(e) => setStartDate(e.target.value)}
+                    firstValue={startDate}
+                    onChangeEndTime={(e) => setEndDate(e.target.value)}
+                    secondValue={endDate}
+                />
+                <AddGuard
+                    value={currentPersonName}
+                    onChange={(e) => onChangePersonName(e)}
+                    onKeyDown={(e) => { handleKeyDown(e) }}
+                    onClick={(e) => { addToPersons(e) }}
+                />
+                <div>
+                    <GuardTime
+                        value={guardTime}
+                        onChange={(e) => setGuardTime(e.target.value)}
+                        minuteHour={minuteHour.toUpperCase()}
+                        value1={minuteHour}
+                        onChange1={(e) => handleChange(e)}
                     />
-                </form>
-                <form className={classesDateInput.container} noValidate>
-                    <TextField
-                        id="datetime-local"
-                        label="End Date"
-                        type="datetime-local"
-                        onChange={(e) => setEndDate(e.target.value)}
-                        value={endDate}
-                        className={classesDateInput.textField}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                    />
-                </form>
-                <div>
-                    <Grid container spacing={1} alignItems="flex-end">
-                        <Grid item>
-                            <AccountCircle />
-                        </Grid>
-                        <Grid item>
-                            <TextField id="input-with-icon-grid" label="Person Name" ref={peronNameRef} value={currentPersonName} onChange={onChangePersonName} onKeyDown={handleKeyDown} />
-                        </Grid>
-                    </Grid>
                 </div>
-                <div>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        className={classesSend.button}
-                        endIcon={<AddCircleIcon ></AddCircleIcon>}
-                        onClick={addToPersons}
-                    >
-                        Add
-                    </Button>
-                </div>
-                <div>
-                    <Grid container spacing={1} alignItems="flex-end">
-                        <Grid item>
-                            <AccountCircle />
-                        </Grid>
-                        <Grid item>
-                            <TextField id="input-with-icon-grid" type="number" label="Guard Time" ref={peronNameRef} value={guardTime} onChange={(e) => setGuardTime(e.target.value)} />
-                        </Grid>
-                    </Grid>
-                    <div>
-                        <Select
-                            className="select"
-                            placeholder={minuteHour.toUpperCase()}
-                            value={minuteHour}
-                            onChange={handleChange}
-                            options={options}
-                            defaultValue={options[0]}
-                        />
-                    </div>
-                </div>
-                <div>
+                <div className="CalculateButton">
                     <Button variant="contained" className={classesButton.margin} onClick={calculatePersons} endIcon={<ExposureIcon ></ExposureIcon>} >
                         Calculate
-                        
                     </Button>
                 </div>
             </form>

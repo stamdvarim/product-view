@@ -1,9 +1,12 @@
+import { Divider } from '@material-ui/core';
 import './App.css';
 import Form from './components/Form';
 
 const App = () => {
   return (
-    <Form />
+    <div className="app">
+      <Form />
+    </div>
   );
 }
 

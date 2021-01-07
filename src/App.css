@@ -1,5 +1,5 @@
 .select {
-  min-width: 100px;
+  min-width: 115px;
   max-width: 150px;
   width: 8%;
 }
@@ -8,4 +8,27 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 10px;
+}
+
+.app {
+  margin-top: 3%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10%;
+  flex-direction: row;
+}
+.MuiButton-root {
+  padding: 3px 10px !important;
+}
+
+.element {
+  margin: 10px;
+}
+
+.CalculateButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5%;
 }
