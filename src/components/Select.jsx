@@ -11,7 +11,7 @@ export const Select = (props) => {
     return (
         <Selector
             className="select"
-            placeholder={props.minuteHour == "HOUR" ? "שעות" : "דקות"}
+            placeholder={props.minuteHour === "HOUR" ? "שעות" : "דקות"}
             value={props.value}
             onChange={(e) => { props.onChange(e) }}
             options={options}

@@ -1,6 +1,6 @@
 //to do - 
 // orgnize the app styile (r to left) and add whatsap buttom to send  
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 //algo
 import { calculateGuards } from '../algo/calculator';
 //time lib

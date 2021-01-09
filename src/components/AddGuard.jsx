@@ -33,15 +33,9 @@ export const AddGuard = (props) => {
                 <TextField id="input-with-icon-grid" label="שם שומר" ref={props.ref} value={props.value} onChange={(e) => props.onChange(e)} onKeyDown={props.onKeyDown} />
             </Grid>
             <ThemeProvider theme={theme}>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    className={classesSend.button}
-                    endIcon={<AddCircleIcon style={{ marginRight: "5px" }} ></AddCircleIcon>}
-                    onClick={props.onClick}
-                >
+                <Button endIcon={<AddCircleIcon style={{ marginRight: "5px" }} ></AddCircleIcon>} variant="contained" color="primary" className={classesSend.margin} onClick={props.onClick} >
                     הוסף
-            </Button>
+                    </Button>
             </ThemeProvider>
         </Grid>
     )
