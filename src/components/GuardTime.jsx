@@ -1,11 +1,8 @@
 import React from 'react'
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Grid from '@material-ui/core/Grid';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import Button from '@material-ui/core/Button';
-
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import { Select } from './Select';
 
 
@@ -22,10 +19,10 @@ export const GuardTime = (props) => {
     return (
         <Grid container spacing={1} alignItems="flex-end" className="element">
             <Grid item>
-                <AccountCircle />
+                <AccessTimeIcon />
             </Grid>
             <Grid item>
-                <TextField id="input-with-icon-grid" type="number" label="Guard Time" value={props.value} onChange={(e) => props.onChange(e)} />
+                <TextField id="input-with-icon-grid" type="number" label="זמן שמירה" value={props.value} onChange={(e) => props.onChange(e)} />
             </Grid>
             <Select
                 minuteHour={props.minuteHour}

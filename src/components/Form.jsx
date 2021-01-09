@@ -1,3 +1,5 @@
+//to do - 
+// orgnize the app styile (r to left) and add whatsap buttom to send  
 import React, { useState, useRef } from 'react';
 //algo
 import { calculateGuards } from '../algo/calculator';
@@ -24,12 +26,6 @@ const Form = () => {
     //..............................................................................................
     //useStyle
     //..............................................................................................
-    const useStylesButtonIcon = makeStyles((theme) => ({
-        button: {
-            margin: theme.spacing(1),
-        },
-    }));
-
     const useStylesCard = makeStyles({
         root: {
             minWidth: 275,
@@ -59,7 +55,6 @@ const Form = () => {
     //..............................................................................................
     //classes
     //..............................................................................................
-    const classesSend = useStylesButtonIcon();
     const classes = useStylesCard();
     const classesButton = useStylesButton();
 
@@ -71,11 +66,12 @@ const Form = () => {
     const month = now.getMonth().toString().length === 1 ? '0' + (now.getMonth() + 1).toString() : now.getMonth() + 1;
     const date = now.getDate().toString().length === 1 ? '0' + (now.getDate()).toString() : now.getDate();
     const hours = now.getHours().toString().length === 1 ? '0' + now.getHours().toString() : now.getHours();
+
     const minutes = now.getMinutes().toString().length === 1 ? '0' + now.getMinutes().toString() : now.getMinutes();
 
     const formattedDateTime = year + '-' + month + '-' + date + 'T' + hours + ':' + minutes;
 
-    const dateEnd = now.getDate().toString().length === 1 ? '0' + (now.getDate() + 1).toString() : now.getDate() + 1;
+    const dateEnd = (now.getDate() + 1).toString().length === 1 ? '0' + (now.getDate() + 1).toString() : now.getDate() + 1;
 
     const formattedDateTimeEnd = year + '-' + month + '-' + dateEnd + 'T' + hours + ':' + minutes;
 
@@ -110,10 +106,10 @@ const Form = () => {
     //add person by push add button
     const addToPersons = () => {
         if (!currentPersonName || !currentPersonName.trimStart().trimEnd()) {
-            return alert("please enter a valid person name");
+            return alert("יש להכניס שם חוקי");
         }
         if (persons.includes(currentPersonName)) {
-            return alert("name already in list");
+            return alert("שם כבר קיים!");
         }
         setPersons(persons => [...persons, currentPersonName]);
         setCurrentPersonName("");
@@ -138,54 +134,56 @@ const Form = () => {
     //claculate list of persons after adding...
     const calculatePersons = () => {
         if (startDate === "" || endDate === "") {
-            return alert("please enter a Date");
+            return alert("יש להכניס תאריך התחלה ותאריך סיום");
         }
         if (guardTime <= 0) {
-            return alert("please enter number above 0");
+            return alert("שמירה חייבת להיות מעל 0 דקות");
         }
         console.log(guardsView);
         if (persons.length <= 1) {
-            return alert("please enter at least 2 guards");
+            return alert("יש להכניס לפחות 2 שמורים");
         }
         setGuardsView(calculateGuards(persons, startDate, endDate, guardTime, minuteHour));
         setisCalculateClicked(true);
     }
 
-
     return (
         <div>
-            <form>
-                <Time
-                    onChangeStartTime={(e) => setStartDate(e.target.value)}
-                    firstValue={startDate}
-                    onChangeEndTime={(e) => setEndDate(e.target.value)}
-                    secondValue={endDate}
-                />
-                <AddGuard
-                    value={currentPersonName}
-                    onChange={(e) => onChangePersonName(e)}
-                    onKeyDown={(e) => { handleKeyDown(e) }}
-                    onClick={(e) => { addToPersons(e) }}
-                />
-                <div>
-                    <GuardTime
-                        value={guardTime}
-                        onChange={(e) => setGuardTime(e.target.value)}
-                        minuteHour={minuteHour.toUpperCase()}
-                        value1={minuteHour}
-                        onChange1={(e) => handleChange(e)}
+            <h1 className="app"> היי ברוכים הבאים לאתר שיסדר לכם את השמירות!</h1>
+            <div className="app">
+                <form>
+                    <Time
+                        onChangeStartTime={(e) => setStartDate(e.target.value)}
+                        firstValue={startDate}
+                        onChangeEndTime={(e) => setEndDate(e.target.value)}
+                        secondValue={endDate}
                     />
-                </div>
-                <div className="CalculateButton">
-                    <Button variant="contained" className={classesButton.margin} onClick={calculatePersons} endIcon={<ExposureIcon ></ExposureIcon>} >
-                        Calculate
+                    <AddGuard
+                        value={currentPersonName}
+                        onChange={(e) => onChangePersonName(e)}
+                        onKeyDown={(e) => { handleKeyDown(e) }}
+                        onClick={(e) => { addToPersons(e) }}
+                    />
+                    <div>
+                        <GuardTime
+                            value={guardTime}
+                            onChange={(e) => setGuardTime(e.target.value)}
+                            minuteHour={minuteHour.toUpperCase()}
+                            value1={minuteHour}
+                            onChange1={(e) => handleChange(e)}
+                        />
+                    </div>
+                    <div className="CalculateButton">
+                        <Button variant="contained" className={classesButton.margin} onClick={calculatePersons} endIcon={<ExposureIcon ></ExposureIcon>} >
+                            חשב שמירות
                     </Button>
-                </div>
-            </form>
+                    </div>
+                </form>
+            </div>
             {
                 isPersonAdd ?
                     <div>
-                        <h2>Persons:</h2>
+                        <h2>שמות השומרים-:</h2>
                         <div className="results">
 
                             {persons.map((name, index) => (
@@ -193,7 +191,7 @@ const Form = () => {
                                     <Card className={classes.root}>
                                         <CardContent>
                                             <Typography variant="h5" component="h2">
-                                                Guard Name -  {name}
+                                                שם שומר -  {name}
                                             </Typography>
                                         </CardContent>
                                         <CardActions>
@@ -204,7 +202,7 @@ const Form = () => {
                                                 startIcon={<DeleteIcon />}
                                                 onClick={() => deletePerson(index)}
                                             >
-                                                Delete
+                                                מחיקה
                                 </Button>
                                         </CardActions>
                                     </Card>
@@ -218,12 +216,12 @@ const Form = () => {
                     <div>
                         <hr />
                         <div>
-                            <h2>Calculated:</h2>
+                            <h2>חישוב השמירות:</h2>
                             <Button onClick={() => window.location.reload(false)}
                                 color="#e0e0e0"
                                 variant="contained"
                             >
-                                Restart
+                                הכל מהתחלה
                             </Button>
                             <div className="results">
                                 {guardsView.map((person, index) => (
@@ -231,13 +229,13 @@ const Form = () => {
                                         <Card className={classes.root}>
                                             <CardContent>
                                                 <Typography variant="h5" component="h2">
-                                                    name: {person.name}
+                                                    שם: {person.name}
                                                 </Typography>
 
                                                 <Typography variant="body2" component="p">
-                                                    Start Time: {moment(person.startTime).format('MM/DD/YYYY, h:mm a')}
+                                                    שעת התחלת השמירה: {moment(person.startTime).format('MM/DD/YYYY, h:mm a')}
                                                     <br />
-                                    End Time: {moment(person.endTime).format('MM/DD/YYYY, h:mm a')}
+                                    שעת סיום השמירה: {moment(person.endTime).format('MM/DD/YYYY, h:mm a')}
                                                 </Typography>
                                             </CardContent>
                                         </Card>

@@ -23,7 +23,7 @@ export const AddGuard = (props) => {
                 <AccountCircle />
             </Grid>
             <Grid item>
-                <TextField id="input-with-icon-grid" label="Person Name" ref={props.ref} value={props.value} onChange={(e) => props.onChange(e)} onKeyDown={props.onKeyDown} />
+                <TextField id="input-with-icon-grid" label="שם שומר" ref={props.ref} value={props.value} onChange={(e) => props.onChange(e)} onKeyDown={props.onKeyDown} />
             </Grid>
             <Button
                 variant="contained"
@@ -32,8 +32,8 @@ export const AddGuard = (props) => {
                 endIcon={<AddCircleIcon ></AddCircleIcon>}
                 onClick={props.onClick}
             >
-                Add
-                    </Button>
+                <label>הוסף</label>
+            </Button>
         </Grid>
     )
 }

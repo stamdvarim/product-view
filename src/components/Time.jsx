@@ -19,13 +19,15 @@ export const Time = (props) => {
 
     const classesDateInput = useStylesDateInput();
 
+    console.log(props.firstValue, " first")
+    console.log(props.secondValue, " second")
 
     return (
         <div className="element">
             <form className={classesDateInput.container} noValidate>
                 <TextField
                     id="datetime-local"
-                    label="Start Date"
+                    label="תחילת זמן "
                     type="datetime-local"
                     onChange={(e) => props.onChangeStartTime(e)}
                     value={props.firstValue}
@@ -37,9 +39,8 @@ export const Time = (props) => {
                 />
                 <TextField
                     id="datetime-local"
-                    label="End Date"
+                    label="סיום זמן"
                     type="datetime-local"
-                    onChangeEndTime
                     onChange={(e) => props.onChangeEndTime(e)}
                     value={props.secondValue}
                     className={classesDateInput.textField}

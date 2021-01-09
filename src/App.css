@@ -1,3 +1,15 @@
+.all {
+  direction: rtl;
+  background-image: url('./images/armyColor.jpg');
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 98vw;
+  height: 94vh;
+}
+
 .select {
   min-width: 115px;
   max-width: 150px;
