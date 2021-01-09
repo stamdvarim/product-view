@@ -1,15 +1,18 @@
+html {
+  background-color: black;
+}
 .all {
   direction: rtl;
   background-image: url('./images/armyColor.jpg');
-
-  /* Center and scale the image nicely */
-  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   width: 98vw;
-  height: 94vh;
+  height: 95vh;
 }
 
+.title {
+  background-color: seagreen;
+}
 .select {
   min-width: 115px;
   max-width: 150px;
@@ -23,7 +26,6 @@
 }
 
 .app {
-  margin-top: 3%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,6 +34,10 @@
 }
 .MuiButton-root {
   padding: 3px 10px !important;
+}
+.sameRow {
+  display: flex;
+  flex-direction: row;
 }
 
 .element {

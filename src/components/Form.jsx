@@ -28,8 +28,10 @@ const Form = () => {
     //..............................................................................................
     const useStylesCard = makeStyles({
         root: {
-            minWidth: 275,
-            maxWidth: 300
+            Width: 275,
+            maxWidth: 300,
+            maxHeight: 150,
+            height: 100,
         },
         bullet: {
             display: 'inline-block',
@@ -139,7 +141,6 @@ const Form = () => {
         if (guardTime <= 0) {
             return alert("שמירה חייבת להיות מעל 0 דקות");
         }
-        console.log(guardsView);
         if (persons.length <= 1) {
             return alert("יש להכניס לפחות 2 שמורים");
         }
@@ -149,9 +150,9 @@ const Form = () => {
 
     return (
         <div>
-            <h1 className="app"> היי ברוכים הבאים לאתר שיסדר לכם את השמירות!</h1>
+            <h1 className="app title"> היי ברוכים הבאים לאתר שיסדר לכם את השמירות!</h1>
             <div className="app">
-                <form>
+                <form style={{ backgroundColor: "seagreen" }}>
                     <Time
                         onChangeStartTime={(e) => setStartDate(e.target.value)}
                         firstValue={startDate}
@@ -174,7 +175,7 @@ const Form = () => {
                         />
                     </div>
                     <div className="CalculateButton">
-                        <Button variant="contained" className={classesButton.margin} onClick={calculatePersons} endIcon={<ExposureIcon ></ExposureIcon>} >
+                        <Button variant="contained" className={classesButton.margin} onClick={calculatePersons} endIcon={<ExposureIcon style={{ marginRight: "5px" }}></ExposureIcon>} >
                             חשב שמירות
                     </Button>
                     </div>
@@ -183,15 +184,14 @@ const Form = () => {
             {
                 isPersonAdd ?
                     <div>
-                        <h2>שמות השומרים-:</h2>
+                        <h2>שמות השומרים :</h2>
                         <div className="results">
-
                             {persons.map((name, index) => (
                                 <div key={index}>
                                     <Card className={classes.root}>
                                         <CardContent>
-                                            <Typography variant="h5" component="h2">
-                                                שם שומר -  {name}
+                                            <Typography variant="h5" component="h7">
+                                                {name}
                                             </Typography>
                                         </CardContent>
                                         <CardActions>
@@ -216,13 +216,18 @@ const Form = () => {
                     <div>
                         <hr />
                         <div>
-                            <h2>חישוב השמירות:</h2>
-                            <Button onClick={() => window.location.reload(false)}
-                                color="#e0e0e0"
-                                variant="contained"
-                            >
-                                הכל מהתחלה
+                            <div className="sameRow">
+                                <h2>חישוב השמירות:</h2>
+                                <Button
+                                    style={{ padding: "0px" }}
+                                    onClick={() => window.location.reload(false)}
+                                    color="#e0e0e0"
+                                    variant="contained"
+                                >
+                                    הכל מהתחלה
                             </Button>
+                            </div>
+
                             <div className="results">
                                 {guardsView.map((person, index) => (
                                     <div key={index}>
@@ -233,9 +238,9 @@ const Form = () => {
                                                 </Typography>
 
                                                 <Typography variant="body2" component="p">
-                                                    שעת התחלת השמירה: {moment(person.startTime).format('MM/DD/YYYY, h:mm a')}
+                                                    שעת התחלת השמירה: {moment(person.startTime).format('H:mm, MM/DD/YYYY')}
                                                     <br />
-                                    שעת סיום השמירה: {moment(person.endTime).format('MM/DD/YYYY, h:mm a')}
+                                    שעת סיום השמירה: {moment(person.endTime).format('H:mm, MM/DD/YYYY')}
                                                 </Typography>
                                             </CardContent>
                                         </Card>

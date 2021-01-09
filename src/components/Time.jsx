@@ -19,9 +19,6 @@ export const Time = (props) => {
 
     const classesDateInput = useStylesDateInput();
 
-    console.log(props.firstValue, " first")
-    console.log(props.secondValue, " second")
-
     return (
         <div className="element">
             <form className={classesDateInput.container} noValidate>

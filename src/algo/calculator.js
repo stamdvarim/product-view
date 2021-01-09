@@ -27,6 +27,9 @@ export const calculateGuards = (personsNames, givenStartTime, givenEndTime, guar
         counter++;
     }
     if(startTime < moment(givenEndTime)){
+        if(counter === shuffledNames.length){
+            counter = 0;
+        }
         guards.push({
             name : shuffledNames[counter],
             startTime : startTime,
