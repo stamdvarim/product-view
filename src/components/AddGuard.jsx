@@ -25,17 +25,21 @@ export const AddGuard = (props) => {
     const classesSend = useStylesButtonIcon();
 
     return (
-        <Grid container spacing={1} alignItems="flex-end" className="element">
+        <Grid container spacing={1} alignItems="flex-end" className="row">
             <Grid item>
                 <AccountCircle />
             </Grid>
             <Grid item>
-                <TextField id="input-with-icon-grid" label="שם שומר" ref={props.ref} value={props.value} onChange={(e) => props.onChange(e)} onKeyDown={props.onKeyDown} />
+                <TextField className="element" id="input-with-icon-grid" label="שם שומר" ref={props.ref} value={props.value} onChange={(e) => props.onChange(e)} onKeyDown={props.onKeyDown} />
             </Grid>
             <ThemeProvider theme={theme}>
-                <Button endIcon={<AddCircleIcon style={{ marginRight: "5px" }} ></AddCircleIcon>} variant="contained" color="primary" className={classesSend.margin} onClick={props.onClick} >
+                <Button
+                    variant="contained" color="primary" className={classesSend.margin}
+                    endIcon={<AddCircleIcon style={{ marginRight: "5px" }} ></AddCircleIcon>}
+                    onClick={props.onClick}
+                >
                     הוסף
-                    </Button>
+            </Button>
             </ThemeProvider>
         </Grid>
     )

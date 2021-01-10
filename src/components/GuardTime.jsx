@@ -8,7 +8,7 @@ import { Select } from './Select';
 export const GuardTime = (props) => {
 
     return (
-        <Grid container spacing={1} alignItems="flex-end" className="element">
+        <Grid container spacing={1} alignItems="flex-end" className="row">
             <Grid item>
                 <AccessTimeIcon />
             </Grid>

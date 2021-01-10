@@ -20,9 +20,10 @@ export const Time = (props) => {
     const classesDateInput = useStylesDateInput();
 
     return (
-        <div className="element">
+        <div className="row">
             <form className={classesDateInput.container} noValidate>
                 <TextField
+                    className="element"
                     id="datetime-local"
                     label="תחילת זמן "
                     type="datetime-local"
@@ -35,6 +36,7 @@ export const Time = (props) => {
 
                 />
                 <TextField
+                    className="element"
                     id="datetime-local"
                     label="סיום זמן"
                     type="datetime-local"

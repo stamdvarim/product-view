@@ -1,51 +1,40 @@
 //to do - 
-// orgnize the app styile (r to left) and add whatsap buttom to send  
+// 1) send on whatsapp  2) styile
 import React, { useState } from 'react';
 //algo
 import { calculateGuards } from '../algo/calculator';
-//time lib
-import moment from 'moment';
 //material libs
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import DeleteIcon from '@material-ui/icons/Delete';
+import RefreshIcon from '@material-ui/icons/Refresh';
 import ExposureIcon from '@material-ui/icons/Exposure';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import CardActions from '@material-ui/core/CardActions';
+import Chip from '@material-ui/core/Chip';
 
 //mine components 
 import { Time } from './Time';
 import { AddGuard } from './AddGuard';
 import { GuardTime } from './GuardTime';
-
+import Table from './Table';
+import { Typography } from '@material-ui/core';
+import ShareButton from './ShareButton';
+//..............................................................................................
+//setting Time
+//..............................................................................................
+const now = new Date();
+const year = now.getFullYear();
+const month = now.getMonth().toString().length === 1 ? '0' + (now.getMonth() + 1).toString() : now.getMonth() + 1;
+const date = now.getDate().toString().length === 1 ? '0' + (now.getDate()).toString() : now.getDate();
+const hours = now.getHours().toString().length === 1 ? '0' + now.getHours().toString() : now.getHours();
+const minutes = now.getMinutes().toString().length === 1 ? '0' + now.getMinutes().toString() : now.getMinutes();
+const formattedDateTime = year + '-' + month + '-' + date + 'T' + hours + ':' + minutes;
+const dateEnd = (now.getDate() + 1).toString().length === 1 ? '0' + (now.getDate() + 1).toString() : now.getDate() + 1;
+const formattedDateTimeEnd = year + '-' + month + '-' + dateEnd + 'T' + hours + ':' + minutes;
 
 const Form = () => {
 
     //..............................................................................................
     //useStyle
     //..............................................................................................
-    const useStylesCard = makeStyles({
-        root: {
-            Width: 275,
-            maxWidth: 300,
-            maxHeight: 150,
-            height: 100,
-        },
-        bullet: {
-            display: 'inline-block',
-            margin: '0 2px',
-            transform: 'scale(0.8)',
-        },
-        title: {
-            fontSize: 14,
-        },
-        pos: {
-            marginBottom: 12,
-        },
-    });
-
     const useStylesButton = makeStyles((theme) => ({
         root: {
             '& > *': {
@@ -57,25 +46,7 @@ const Form = () => {
     //..............................................................................................
     //classes
     //..............................................................................................
-    const classes = useStylesCard();
     const classesButton = useStylesButton();
-
-    //..............................................................................................
-    //setting Time
-    //..............................................................................................
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = now.getMonth().toString().length === 1 ? '0' + (now.getMonth() + 1).toString() : now.getMonth() + 1;
-    const date = now.getDate().toString().length === 1 ? '0' + (now.getDate()).toString() : now.getDate();
-    const hours = now.getHours().toString().length === 1 ? '0' + now.getHours().toString() : now.getHours();
-
-    const minutes = now.getMinutes().toString().length === 1 ? '0' + now.getMinutes().toString() : now.getMinutes();
-
-    const formattedDateTime = year + '-' + month + '-' + date + 'T' + hours + ':' + minutes;
-
-    const dateEnd = (now.getDate() + 1).toString().length === 1 ? '0' + (now.getDate() + 1).toString() : now.getDate() + 1;
-
-    const formattedDateTimeEnd = year + '-' + month + '-' + dateEnd + 'T' + hours + ':' + minutes;
 
     //..............................................................................................
     // use state
@@ -85,11 +56,9 @@ const Form = () => {
     const [currentPersonName, setCurrentPersonName] = useState("");
     const [startDate, setStartDate] = useState(formattedDateTime);
     const [endDate, setEndDate] = useState(formattedDateTimeEnd);
-    const [guardTime, setGuardTime] = useState(1);
+    const [guardTime, setGuardTime] = useState();
     const [guardsView, setGuardsView] = useState([]);
     const [minuteHour, setMinuteHour] = useState("hour");
-    const [isCalculateClicked, setisCalculateClicked] = useState(false);
-    const [isPersonAdd, setIsPersonAdd] = useState(false);
 
     //..............................................................................................
     //function
@@ -115,7 +84,6 @@ const Form = () => {
         }
         setPersons(persons => [...persons, currentPersonName]);
         setCurrentPersonName("");
-        setIsPersonAdd(true)
     }
 
     //using enter to add person
@@ -138,6 +106,9 @@ const Form = () => {
         if (startDate === "" || endDate === "") {
             return alert("יש להכניס תאריך התחלה ותאריך סיום");
         }
+        if (!guardTime) {
+            return alert("יש להזין את משך זמן השמירה");
+        }
         if (guardTime <= 0) {
             return alert("שמירה חייבת להיות מעל 0 דקות");
         }
@@ -145,14 +116,19 @@ const Form = () => {
             return alert("יש להכניס לפחות 2 שמורים");
         }
         setGuardsView(calculateGuards(persons, startDate, endDate, guardTime, minuteHour));
-        setisCalculateClicked(true);
     }
+    console.log(guardsView)
+
 
     return (
         <div>
-            <h1 className="app title"> היי ברוכים הבאים לאתר שיסדר לכם את השמירות!</h1>
+            <Typography style={{
+                maxWidth: 'fit-content',
+                margin: '0 auto'
+            }} variant='h4' className="app title"> היי ברוכים הבאים לאתר שיסדר לכם את השמירות!
+            </Typography>
             <div className="app">
-                <form style={{ backgroundColor: "seagreen" }}>
+                <form style={{ backgroundColor: "seagreen", margin: "3%", minWidth: "60%", borderRadius: "15px" }}>
                     <Time
                         onChangeStartTime={(e) => setStartDate(e.target.value)}
                         firstValue={startDate}
@@ -182,77 +158,51 @@ const Form = () => {
                 </form>
             </div>
             {
-                isPersonAdd ?
-                    <div>
-                        <h2>שמות השומרים :</h2>
-                        <div className="results">
-                            {persons.map((name, index) => (
-                                <div key={index}>
-                                    <Card className={classes.root}>
-                                        <CardContent>
-                                            <Typography variant="h5" component="h7">
-                                                {name}
-                                            </Typography>
-                                        </CardContent>
-                                        <CardActions>
-                                            <Button
-                                                variant="contained"
-                                                color="secondary"
-                                                className={classesButton.button}
-                                                startIcon={<DeleteIcon />}
-                                                onClick={() => deletePerson(index)}
-                                            >
-                                                מחיקה
-                                </Button>
-                                        </CardActions>
-                                    </Card>
-                                </div>
-                            ))}
-                        </div>
+                persons.length > 0 &&
+                <div>
+                    <h2 className="row">שמות השומרים : </h2>
+                    <div className="row">
+                        {persons.map((name, index) => (
+                            <div key={index}>
+                                <Chip
+                                    className="element"
+                                    label={name}
+                                    onDelete={() => deletePerson(index)}
+                                    color="primary"
+                                />
+                            </div>
+                        ))}
                     </div>
-                    : ""}
+                </div>
+            }
             {
-                isCalculateClicked ?
+                guardsView.length > 0 ?
                     <div>
                         <hr />
                         <div>
-                            <div className="sameRow">
+                            <div className="row">
                                 <h2>חישוב השמירות:</h2>
+                                <Button variant="contained" className={classesButton.margin} onClick={calculatePersons} endIcon={<ExposureIcon style={{ marginRight: "5px" }}></ExposureIcon>} >
+                                    הגרל שוב
+                    </Button>
                                 <Button
-                                    style={{ padding: "0px" }}
+                                    endIcon={<RefreshIcon style={{ marginRight: "5px" }}></RefreshIcon>}
+                                    RefreshIcon
+                                    style={{ margin: "5px" }}
                                     onClick={() => window.location.reload(false)}
                                     color="#e0e0e0"
                                     variant="contained"
                                 >
                                     הכל מהתחלה
                             </Button>
+                                <ShareButton url={"http://localhost:3000/"} title={"hi i'm using whatsap!"}></ShareButton>
                             </div>
-
-                            <div className="results">
-                                {guardsView.map((person, index) => (
-                                    <div key={index}>
-                                        <Card className={classes.root}>
-                                            <CardContent>
-                                                <Typography variant="h5" component="h2">
-                                                    שם: {person.name}
-                                                </Typography>
-
-                                                <Typography variant="body2" component="p">
-                                                    שעת התחלת השמירה: {moment(person.startTime).format('H:mm, MM/DD/YYYY')}
-                                                    <br />
-                                    שעת סיום השמירה: {moment(person.endTime).format('H:mm, MM/DD/YYYY')}
-                                                </Typography>
-                                            </CardContent>
-                                        </Card>
-                                    </div>
-                                ))
-                                }
-                            </div>
+                            <Table guards={guardsView} />
                         </div>
                     </div>
                     : ""
             }
-        </div>
+        </div >
     )
 }
 

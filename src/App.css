@@ -2,44 +2,35 @@ html {
   background-color: black;
 }
 .all {
-  direction: rtl;
   background-image: url('./images/armyColor.jpg');
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   background-size: cover;
-  width: 98vw;
-  height: 95vh;
+  min-height: 100vh;
 }
 
 .title {
   background-color: seagreen;
+  border-radius: 15px;
 }
+.MuiTableCell-head {
+  font-weight: bold !important;
+}
+
 .select {
   min-width: 115px;
   max-width: 150px;
   width: 8%;
-}
-.results {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 10px;
 }
 
 .app {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10%;
   flex-direction: row;
 }
 .MuiButton-root {
   padding: 3px 10px !important;
 }
-.sameRow {
-  display: flex;
-  flex-direction: row;
-}
-
 .element {
   margin: 10px;
 }
@@ -49,4 +40,13 @@ html {
   align-items: center;
   justify-content: center;
   margin-top: 5%;
+}
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.MuiFormControl-root {
+  margin: 10px !important;
 }
