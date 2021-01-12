@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { CastToDiconary } from '../algo/CastToDiconary';
 import { WhatsappShareButton, WhatsappIcon } from "react-share";
 import Button from '@material-ui/core/Button';
-import moment from 'moment';
 
 const ShareButton = (props) => {
     const { guardsView } = props;
@@ -12,11 +11,9 @@ const ShareButton = (props) => {
         let message = ``;
         Object.entries(guardsDictionary).map(([key, value]) => {
             let currentGuardMessage = `
-                ${key} - סה"כ ${value.length} שמירות:
-            `;
+                *${key}* - סה"כ *${value.length}* שמירות:\n`;
             value.map(x => {
-                currentGuardMessage += `משעה ${x.startGuard.format('H:mm - MM/DD')}  עד שעה - ${x.endGuard.format('H:mm - MM/DD')}
-                `
+                currentGuardMessage += `משעה - ${x.startGuard.format('H:mm MM/DD')}, עד שעה - ${x.endGuard.format('H:mm MM/DD')}\n`
             });
             message += currentGuardMessage;
         });

@@ -125,7 +125,7 @@ const Form = () => {
     return (
         <div>
             <div className="app">
-                <form style={{ backgroundColor: "#fdfcedf0", margin: "3%", borderRadius: "5px", boxShadow: "-moz-initial", boxShadow: "black 1px 1px 20px 1px" }}>
+                <form style={{ padding: "3%", backgroundColor: "#fdfcedf0", margin: "3%", borderRadius: "5px", boxShadow: "-moz-initial", boxShadow: "black 1px 1px 20px 1px" }}>
                     <div>
                         <div className="row">
                             <Typography style={{
