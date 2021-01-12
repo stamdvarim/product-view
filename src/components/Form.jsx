@@ -123,7 +123,7 @@ const Form = () => {
     return (
         <div>
             <div className="app">
-                <form style={{ padding: "3%", backgroundColor: "#fdfcedf0", margin: "3%", borderRadius: "5px", boxShadow: "black 1px 1px 20px 1px" }}>
+                <form style={{ maxWidth: "500px", padding: "3%", backgroundColor: "#fdfcedf0", margin: "3%", borderRadius: "5px", boxShadow: "black 1px 1px 20px 1px" }}>
                     <div>
                         <div className="row">
                             <Typography style={{
@@ -157,6 +157,7 @@ const Form = () => {
                             {persons.map((name, index) => (
                                 <div key={index}>
                                     <Chip
+                                        className=""
                                         size="small"
                                         label={name}
                                         onDelete={() => deletePerson(index)}
