@@ -8,10 +8,6 @@ html {
   min-height: 100vh;
 }
 
-.title {
-  background-color: seagreen;
-  border-radius: 15px;
-}
 .MuiTableCell-head {
   font-weight: bold !important;
 }
@@ -49,4 +45,7 @@ html {
 }
 .MuiFormControl-root {
   margin: 10px !important;
+}
+.MuiInputBase-input {
+  text-align: right;
 }

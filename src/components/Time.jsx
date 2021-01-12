@@ -9,6 +9,8 @@ export const Time = (props) => {
         container: {
             display: 'flex',
             flexWrap: 'wrap',
+            alignItems: 'center',
+            justifyContent: 'center'
         },
         textField: {
             marginLeft: theme.spacing(1),

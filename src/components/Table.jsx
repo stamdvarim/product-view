@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -21,26 +21,30 @@ const GuardsTable = (props) => {
     const classes = useStyles();
 
     return (
-        <Table className={classes.table} aria-label="simple table">
-            <TableHead>
-                <TableRow >
-                    <TableCell>שם שומר</TableCell>
-                    <TableCell>זמן התחלה</TableCell>
-                    <TableCell>זמן סיום</TableCell>
-                </TableRow>
-            </TableHead>
-            <TableBody>
-                {guards.map((guard, index) => (
-                    <TableRow key={index}>
-                        <TableCell component="th" scope="row">
-                            {guard.name}
-                        </TableCell>
-                        <TableCell>{guard.startTime.format('MM/DD, H:mm')}</TableCell>
-                        <TableCell>{guard.endTime.format('MM/DD, H:mm')}</TableCell>
+        <div className={classes.table}>
+            <h2>חישוב השמירות</h2>
+            <Table aria-label="simple table">
+                <TableHead>
+                    <TableRow >
+                        <TableCell>שם שומר</TableCell>
+                        <TableCell>זמן התחלה</TableCell>
+                        <TableCell>זמן סיום</TableCell>
                     </TableRow>
-                ))}
-            </TableBody>
-        </Table>
+                </TableHead>
+                <TableBody>
+                    {guards.map((guard, index) => (
+                        <TableRow key={index}>
+                            <TableCell component="th" scope="row">
+                                {guard.name}
+                            </TableCell>
+                            <TableCell>{guard.startTime.format('H:mm - MM/DD')}</TableCell>
+                            {console.log(guard.endTime)}
+                            <TableCell>{guard.endTime.format('H:mm - MM/DD')}</TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </div>
     );
 }
 

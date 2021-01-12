@@ -33,7 +33,7 @@ export const calculateGuards = (personsNames, givenStartTime, givenEndTime, guar
         guards.push({
             name : shuffledNames[counter],
             startTime : startTime,
-            endTime: givenEndTime
+            endTime: moment(givenEndTime)
         });
     }
     return guards;

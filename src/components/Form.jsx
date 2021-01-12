@@ -14,6 +14,8 @@ import Chip from '@material-ui/core/Chip';
 import { Time } from './Time';
 import { AddGuard } from './AddGuard';
 import { GuardTime } from './GuardTime';
+import { GuardTimePicker } from './GuardTimePicker';
+
 import Table from './Table';
 import { Typography } from '@material-ui/core';
 import ShareButton from './ShareButton';
@@ -122,13 +124,23 @@ const Form = () => {
 
     return (
         <div>
-            <Typography style={{
-                maxWidth: 'fit-content',
-                margin: '0 auto'
-            }} variant='h4' className="app title"> היי ברוכים הבאים לאתר שיסדר לכם את השמירות!
-            </Typography>
             <div className="app">
-                <form style={{ backgroundColor: "seagreen", margin: "3%", minWidth: "60%", borderRadius: "15px" }}>
+                <form style={{ backgroundColor: "#fdfcedf0", margin: "3%", borderRadius: "5px", boxShadow: "-moz-initial", boxShadow: "black 1px 1px 20px 1px" }}>
+                    <div>
+                        <div className="row">
+                            <Typography style={{
+                                margin: '0 auto'
+                            }} variant='h4' >  ברוכים הבאים!
+                    </Typography>
+                        </div>
+                        <div className="row">
+                            <Typography style={{
+                                margin: '0 auto'
+                            }} variant='h7' >  ה-אתר שיסדר לכם את השמירות
+                    </Typography>
+                        </div>
+                        <hr />
+                    </div>
                     <Time
                         onChangeStartTime={(e) => setStartDate(e.target.value)}
                         firstValue={startDate}
@@ -142,6 +154,10 @@ const Form = () => {
                         onClick={(e) => { addToPersons(e) }}
                     />
                     <div>
+                        {/* <GuardTimePicker
+                            value={guardTime}
+                            onChange={(e) => setGuardTime(e.target.value)}
+                        /> */}
                         <GuardTime
                             value={guardTime}
                             onChange={(e) => setGuardTime(e.target.value)}
@@ -168,7 +184,7 @@ const Form = () => {
                                     className="element"
                                     label={name}
                                     onDelete={() => deletePerson(index)}
-                                    color="primary"
+                                    color="default"
                                 />
                             </div>
                         ))}
@@ -181,10 +197,9 @@ const Form = () => {
                         <hr />
                         <div>
                             <div className="row">
-                                <h2>חישוב השמירות:</h2>
                                 <Button variant="contained" className={classesButton.margin} onClick={calculatePersons} endIcon={<ExposureIcon style={{ marginRight: "5px" }}></ExposureIcon>} >
                                     הגרל שוב
-                    </Button>
+                                </Button>
                                 <Button
                                     endIcon={<RefreshIcon style={{ marginRight: "5px" }}></RefreshIcon>}
                                     RefreshIcon
@@ -195,7 +210,7 @@ const Form = () => {
                                 >
                                     הכל מהתחלה
                             </Button>
-                                <ShareButton url={"http://localhost:3000/"} title={"hi i'm using whatsap!"}></ShareButton>
+                                <ShareButton guardsView={guardsView}></ShareButton>
                             </div>
                             <Table guards={guardsView} />
                         </div>
