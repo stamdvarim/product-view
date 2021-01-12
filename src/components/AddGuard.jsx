@@ -1,37 +1,24 @@
 import React from 'react'
 import TextField from '@material-ui/core/TextField';
-import { makeStyles, ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import Button from '@material-ui/core/Button';
 
 
 export const AddGuard = (props) => {
 
-    const useStylesButtonIcon = makeStyles((theme) => ({
-        button: {
-            margin: theme.spacing(1),
-        },
-    }));
-
-    const classesSend = useStylesButtonIcon();
-
     return (
-        <Grid container spacing={1} alignItems="flex-end" className="row">
-            <Grid item>
-                <AccountCircle />
+        <div className="row">
+            <Grid className="row" container spacing={1} alignItems="flex-end" >
+                <Grid item>
+                    <AccountCircle />
+                </Grid>
+                <Grid item>
+                    <TextField className="element" id="input-with-icon-grid" label="שם שומר" ref={props.ref} value={props.value} onChange={(e) => props.onChange(e)} onKeyDown={props.onKeyDown} />
+                </Grid>
             </Grid>
-            <Grid item>
-                <TextField className="element" id="input-with-icon-grid" label="שם שומר" ref={props.ref} value={props.value} onChange={(e) => props.onChange(e)} onKeyDown={props.onKeyDown} />
-            </Grid>
-            <Button
-                variant="contained" color="default" className={classesSend.margin}
-                endIcon={<AddCircleIcon style={{ marginRight: "5px" }} ></AddCircleIcon>}
-                onClick={props.onClick}
-            >
-                הוסף
-            </Button>
-        </Grid>
+            <AddCircleIcon style={{ fontSize: "2rem" }} onClick={props.onClick} ></AddCircleIcon>
+        </div >
+
     )
 }

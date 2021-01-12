@@ -38,7 +38,6 @@ const GuardsTable = (props) => {
                                 {guard.name}
                             </TableCell>
                             <TableCell>{guard.startTime.format('H:mm - MM/DD')}</TableCell>
-                            {console.log(guard.endTime)}
                             <TableCell>{guard.endTime.format('H:mm - MM/DD')}</TableCell>
                         </TableRow>
                     ))}

@@ -14,7 +14,6 @@ import Chip from '@material-ui/core/Chip';
 import { Time } from './Time';
 import { AddGuard } from './AddGuard';
 import { GuardTime } from './GuardTime';
-import { GuardTimePicker } from './GuardTimePicker';
 
 import Table from './Table';
 import { Typography } from '@material-ui/core';
@@ -119,13 +118,12 @@ const Form = () => {
         }
         setGuardsView(calculateGuards(persons, startDate, endDate, guardTime, minuteHour));
     }
-    console.log(guardsView)
 
 
     return (
         <div>
             <div className="app">
-                <form style={{ padding: "3%", backgroundColor: "#fdfcedf0", margin: "3%", borderRadius: "5px", boxShadow: "-moz-initial", boxShadow: "black 1px 1px 20px 1px" }}>
+                <form style={{ padding: "3%", backgroundColor: "#fdfcedf0", margin: "3%", borderRadius: "5px", boxShadow: "black 1px 1px 20px 1px" }}>
                     <div>
                         <div className="row">
                             <Typography style={{
@@ -153,11 +151,22 @@ const Form = () => {
                         onKeyDown={(e) => { handleKeyDown(e) }}
                         onClick={(e) => { addToPersons(e) }}
                     />
+                    {/* {console.log(persons)}
+                    {persons.length > 0 &&
+                        <div className="row">
+                            {persons.map((name, index) => (
+                                <div key={index}>
+                                    <Chip
+                                        className="element"
+                                        label={name}
+                                        onDelete={deletePerson(index)}
+                                        color="default"
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    } */}
                     <div>
-                        {/* <GuardTimePicker
-                            value={guardTime}
-                            onChange={(e) => setGuardTime(e.target.value)}
-                        /> */}
                         <GuardTime
                             value={guardTime}
                             onChange={(e) => setGuardTime(e.target.value)}
