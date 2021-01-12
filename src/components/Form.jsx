@@ -114,7 +114,10 @@ const Form = () => {
             return alert("שמירה חייבת להיות מעל 0 דקות");
         }
         if (persons.length <= 1) {
-            return alert("יש להכניס לפחות 2 שמורים");
+            return alert("יש להכניס לפחות 2 שומרים");
+        }
+        if (startDate > endDate) {
+            return alert("זמן התחלת השמירה גדול מזמן הסיום...");
         }
         setGuardsView(calculateGuards(persons, startDate, endDate, guardTime, minuteHour));
     }
@@ -151,7 +154,6 @@ const Form = () => {
                         onKeyDown={(e) => { handleKeyDown(e) }}
                         onClick={(e) => { addToPersons(e) }}
                     />
-                    {console.log(persons)}
                     {persons.length > 0 &&
                         <div className="row">
                             {persons.map((name, index) => (
