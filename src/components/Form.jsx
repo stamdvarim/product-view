@@ -151,21 +151,21 @@ const Form = () => {
                         onKeyDown={(e) => { handleKeyDown(e) }}
                         onClick={(e) => { addToPersons(e) }}
                     />
-                    {/* {console.log(persons)}
+                    {console.log(persons)}
                     {persons.length > 0 &&
                         <div className="row">
                             {persons.map((name, index) => (
                                 <div key={index}>
                                     <Chip
-                                        className="element"
+                                        size="small"
                                         label={name}
-                                        onDelete={deletePerson(index)}
+                                        onDelete={() => deletePerson(index)}
                                         color="default"
                                     />
                                 </div>
                             ))}
                         </div>
-                    } */}
+                    }
                     <div>
                         <GuardTime
                             value={guardTime}
@@ -182,24 +182,6 @@ const Form = () => {
                     </div>
                 </form>
             </div>
-            {
-                persons.length > 0 &&
-                <div>
-                    <h2 className="row">שמות השומרים : </h2>
-                    <div className="row">
-                        {persons.map((name, index) => (
-                            <div key={index}>
-                                <Chip
-                                    className="element"
-                                    label={name}
-                                    onDelete={() => deletePerson(index)}
-                                    color="default"
-                                />
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            }
             {
                 guardsView.length > 0 ?
                     <div>
