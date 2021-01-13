@@ -5,28 +5,36 @@ import Button from '@material-ui/core/Button';
 
 const ShareButton = (props) => {
     const { guardsView } = props;
-    const [message, setMessage] = useState('');
-    const generateToText = () => {
-        const guardsDictionary = CastToDiconary(guardsView);
-        let message = ``;
-        Object.entries(guardsDictionary).map(([key, value]) => {
-            let currentGuardMessage = `
-                *${key}* - סה"כ *${value.length}* שמירות:\n`;
-            value.map(x => {
-                currentGuardMessage += `משעה - ${x.startGuard.format('H:mm MM/DD')}, עד שעה - ${x.endGuard.format('H:mm MM/DD')}\n`
-            });
-            message += currentGuardMessage;
-        });
-        return message
-    }
+    // const [message, setMessage] = useState('');
 
-    useEffect(() => {
-        setMessage(generateToText());
-    }, [guardsView])
+    const generateToText = () => {
+        let message = `*רשימת שמות:*\n`;
+        guardsView.map(x => {
+            message += `${x.startTime.format('HH:mm')} - ${x.endTime.format('HH:mm')}  *${x.name.trim()}* \n`;
+        });
+        return message;
+    }
+    // const generateToText = () => {
+    //     const guardsDictionary = CastToDiconary(guardsView);
+    //     let message = ``;
+    //     Object.entries(guardsDictionary).map(([key, value]) => {
+    //         let currentGuardMessage = `
+    //             *${key}* - סה"כ *${value.length}* שמירות:\n`;
+    //         value.map(x => {
+    //             currentGuardMessage += `משעה - ${x.startGuard.format('H:mm MM/DD')}, עד שעה - ${x.endGuard.format('H:mm MM/DD')}\n`
+    //         });
+    //         message += currentGuardMessage;
+    //     });
+    //     return message
+    // }
+
+    // useEffect(() => {
+    //     setMessage(generateToText());
+    // }, [guardsView])
 
     return (
         <div>
-            <WhatsappShareButton url={message}><Button variant="contained" style={{ direction: "ltr" }} > <WhatsappIcon size={25} round={true}></WhatsappIcon>  שתף עם חבריך  </Button></WhatsappShareButton >
+            <WhatsappShareButton url={generateToText()}><Button variant="contained" style={{ direction: "ltr" }} > <WhatsappIcon size={25} round={true}></WhatsappIcon>  שתף עם חבריך  </Button></WhatsappShareButton >
         </div >
     )
 }

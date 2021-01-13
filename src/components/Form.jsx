@@ -155,7 +155,7 @@ const Form = () => {
                         onClick={(e) => { addToPersons(e) }}
                     />
                     {persons.length > 0 &&
-                        <div className="row">
+                        <div className="row" style={{ marginTop: "15px" }}>
                             {persons.map((name, index) => (
                                 <div key={index}>
                                     <Chip
@@ -179,7 +179,7 @@ const Form = () => {
                         />
                     </div>
                     <div className="CalculateButton">
-                        <Button variant="contained" className={classesButton.margin} onClick={calculatePersons} endIcon={<ExposureIcon style={{ marginRight: "5px" }}></ExposureIcon>} >
+                        <Button variant="contained" className={classesButton.margin} onClick={calculatePersons} >
                             חשב שמירות
                     </Button>
                     </div>
