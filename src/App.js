@@ -21,7 +21,7 @@ const classesFooter = useStylesFooter();
     </div>
      <footer className={classesFooter.footer} style={{ textAlign: "center" }}>
      <Container maxWidth="sm">
-         <Typography variant="body1" style={{ fontSize: "0.9rem" }}>ליצירת קשר יש לפנות למספר הפלאפון - 0522543225</Typography>
+         <Typography variant="body1" style={{ fontSize: "0.9rem" }}>ליצירת קשר יש לפנות למספר הפלאפון - 0537001413</Typography>
      </Container>
  </footer>
  </div>
