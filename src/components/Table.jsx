@@ -5,6 +5,9 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
+
 
 const GuardsTable = (props) => {
 
@@ -16,7 +19,16 @@ const GuardsTable = (props) => {
         },
     });
 
+    const useStylesFooter = makeStyles((theme) => ({
+        footer: {
+            marginTop: 'auto',
+            backgroundColor:
+                theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[800],
+        },
+    }));
+    const classesFooter = useStylesFooter();
     const classes = useStyles();
+
 
     const { guards } = props;
 
@@ -44,6 +56,12 @@ const GuardsTable = (props) => {
                     ))}
                 </TableBody>
             </Table>
+
+            <footer className={classesFooter.footer} style={{ textAlign: "center" }}>
+                <Container maxWidth="sm">
+                    <Typography variant="body1" style={{ fontSize: "0.9rem" }}>ליצירת קשר יש לפנות למספר הפלאפון - 0522543225</Typography>
+                </Container>
+            </footer>
         </div>
     );
 }
