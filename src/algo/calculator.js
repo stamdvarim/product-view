@@ -8,8 +8,14 @@ const shuffle = (names) => {
     return names;
 }
 
-export const calculateGuards = (personsNames, givenStartTime, givenEndTime, guardTime, minuteHour) => {
-    const shuffledNames = [...shuffle([...personsNames])];
+export const calculateGuards = (personsNames, givenStartTime, givenEndTime, guardTime, minuteHour, isRandom) => {
+    let shuffledNames = []
+    if(isRandom){
+        shuffledNames = [...shuffle([...personsNames])];
+    }
+    else{
+        shuffledNames = personsNames;
+    }
     let counter = 0;
     let guards = [];
     let startTime = moment(givenStartTime);

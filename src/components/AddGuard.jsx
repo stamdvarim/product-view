@@ -3,8 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-
-
+import Tooltip from '@material-ui/core/Tooltip';
 
 export const AddGuard = (props) => {
 
@@ -20,7 +19,9 @@ export const AddGuard = (props) => {
                     <TextField className="element" id="input-with-icon-grid" label="שם שומר" inputRef={ref} value={props.value} onChange={(e) => props.onChange(e)} onKeyDown={props.onKeyDown} />
                 </Grid>
             </Grid>
-            <AddCircleIcon style={{ fontSize: "2rem" }} onClick={(e) => { props.onClick(e); ref.current.focus(); }} ></AddCircleIcon>
+            <Tooltip title="הוספת שומר">
+                <AddCircleIcon style={{ fontSize: "2rem" }} onClick={(e) => { props.onClick(e); ref.current.focus(); }} ></AddCircleIcon>
+            </Tooltip>
         </div >
 
     )

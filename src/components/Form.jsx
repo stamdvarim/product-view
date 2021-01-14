@@ -103,7 +103,7 @@ const Form = () => {
     }
 
     //claculate list of persons after adding...
-    const calculatePersons = () => {
+    const calculatePersons = (isRandom) => {
         if (startDate === "" || endDate === "") {
             return alert("יש להכניס תאריך התחלה ותאריך סיום");
         }
@@ -119,7 +119,7 @@ const Form = () => {
         if (startDate > endDate) {
             return alert("זמן התחלת השמירה גדול מזמן הסיום...");
         }
-        setGuardsView(calculateGuards(persons, startDate, endDate, guardTime, minuteHour));
+        setGuardsView(calculateGuards(persons, startDate, endDate, guardTime, minuteHour, isRandom));
     }
 
 
@@ -161,7 +161,7 @@ const Form = () => {
                                     <Chip
                                         className=""
                                         size="small"
-                                        label={name}
+                                        label={`${index + 1}) ${name}`}
                                         onDelete={() => deletePerson(index)}
                                         color="default"
                                     />
@@ -179,8 +179,11 @@ const Form = () => {
                         />
                     </div>
                     <div className="CalculateButton">
-                        <Button variant="contained" className={classesButton.margin} onClick={calculatePersons} >
-                            חשב שמירות
+                        <Button variant="contained" className={classesButton.margin} size="small" onClick={(e) => calculatePersons(true)} >
+                            חשב שמירות רנדומלי
+                    </Button>
+                        <Button variant="contained" className={classesButton.margin} size="small" onClick={(e) => calculatePersons(false)} >
+                            חשב שמירות לפי סדר
                     </Button>
                     </div>
                 </form>
@@ -191,7 +194,7 @@ const Form = () => {
                         <hr />
                         <div>
                             <div className="row">
-                                <Button variant="contained" className={classesButton.margin} onClick={calculatePersons} endIcon={<ExposureIcon style={{ marginRight: "5px" }}></ExposureIcon>} >
+                                <Button variant="contained" className={classesButton.margin} onClick={(e) => calculatePersons(true)} endIcon={<ExposureIcon style={{ marginRight: "5px" }}></ExposureIcon>} >
                                     הגרל שוב
                                 </Button>
                                 <Button
