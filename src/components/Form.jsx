@@ -59,7 +59,7 @@ const Form = () => {
     const [endDate, setEndDate] = useState(formattedDateTimeEnd);
     const [guardTime, setGuardTime] = useState();
     const [guardsView, setGuardsView] = useState([]);
-    const [minuteHour, setMinuteHour] = useState("minuet");
+    const [minuteHour, setMinuteHour] = useState("minute");
 
     //..............................................................................................
     //function
