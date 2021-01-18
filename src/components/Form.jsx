@@ -28,8 +28,8 @@ const date = now.getDate().toString().length === 1 ? '0' + (now.getDate()).toStr
 const hours = now.getHours().toString().length === 1 ? '0' + now.getHours().toString() : now.getHours();
 const minutes = now.getMinutes().toString().length === 1 ? '0' + now.getMinutes().toString() : now.getMinutes();
 const formattedDateTime = year + '-' + month + '-' + date + 'T' + hours + ':' + minutes;
-const dateEnd = (now.getDate() + 1).toString().length === 1 ? '0' + (now.getDate() + 1).toString() : now.getDate() + 1;
-const formattedDateTimeEnd = year + '-' + month + '-' + dateEnd + 'T' + hours + ':' + minutes;
+const hoursEnd = (now.getHours() + 1).toString().length === 1 ? '0' + (now.getHours() + 1).toString() : now.getHours() + 1;
+const formattedDateTimeEnd = year + '-' + month + '-' + date + 'T' + hoursEnd + ':' + minutes;
 
 const Form = () => {
 
@@ -59,7 +59,7 @@ const Form = () => {
     const [endDate, setEndDate] = useState(formattedDateTimeEnd);
     const [guardTime, setGuardTime] = useState();
     const [guardsView, setGuardsView] = useState([]);
-    const [minuteHour, setMinuteHour] = useState("hour");
+    const [minuteHour, setMinuteHour] = useState("minuet");
 
     //..............................................................................................
     //function
@@ -116,8 +116,8 @@ const Form = () => {
         if (persons.length <= 1) {
             return alert("יש להכניס לפחות 2 שומרים");
         }
-        if (startDate > endDate) {
-            return alert("זמן התחלת השמירה גדול מזמן הסיום...");
+        if (startDate >= endDate) {
+            return alert("זמן סוף השמירה חייב להיות גדול מזמן התחלת השמירה");
         }
         setGuardsView(calculateGuards(persons, startDate, endDate, guardTime, minuteHour, isRandom));
     }
