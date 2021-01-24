@@ -7,12 +7,15 @@ import Button from '@material-ui/core/Button';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import ExposureIcon from '@material-ui/icons/Exposure';
 import Chip from '@material-ui/core/Chip';
+import { withStyles } from '@material-ui/core/styles';
+import MuiAccordion from '@material-ui/core/Accordion';
+import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
+import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
 
 //mine components 
 import { Time } from './Time';
 import { AddGuard } from './AddGuard';
-import { GuardTime } from './GuardTime';
-
+import { ControlledAccordions } from "./Accordion";
 import Table from './Table';
 import { Typography } from '@material-ui/core';
 import ShareButton from './ShareButton';
@@ -60,15 +63,12 @@ const Form = () => {
     const [guardTime, setGuardTime] = useState();
     const [guardsView, setGuardsView] = useState([]);
     const [minuteHour, setMinuteHour] = useState("minute");
+    const [expanded, setExpanded] = useState('panel1');
+    const [isEqualTime, setIsEqualTime] = useState(true);
 
     //..............................................................................................
     //function
     //..............................................................................................
-
-    // track houre minute selector 
-    const handleChange = selectedOption => {
-        setMinuteHour(selectedOption.value);
-    };
 
     //track person name
     const onChangePersonName = (e) => {
@@ -113,14 +113,15 @@ const Form = () => {
         if (startDate >= endDate) {
             return alert("זמן סוף השמירה חייב להיות גדול מזמן התחלת השמירה");
         }
+        setIsEqualTime(true);
         const countGuards = persons.length;
         console.log(countGuards, "countGuards");
         const sumTime = moment(endDate).diff(moment(startDate), minuteHour);
         console.log(sumTime, "sumTime");
-        const evenguardTime = Math.floor(sumTime / countGuards);
+        const evenguardTime = sumTime / countGuards != 0 ? Math.floor(sumTime / countGuards) : Math.ceil(sumTime / countGuards);
         console.log(evenguardTime, "evenguardTime", evenguardTime / 60, "evenguardTime in houers");
         if (evenguardTime > (6 * 60)) {
-            alert("זמן השמירה עבור כל אחד גדול מ6 שעות, אולי תרצה לקבוע זמן שמירה ?");
+            alert("זמן השמירה יצא גדול מ6 שעות, אולי כדי להגדיר זמן שמירה?");
         }
         setGuardsView(calculateGuards(persons, startDate, endDate, evenguardTime, minuteHour, isRandom));
     }
@@ -141,6 +142,7 @@ const Form = () => {
         if (startDate >= endDate) {
             return alert("זמן סוף השמירה חייב להיות גדול מזמן התחלת השמירה");
         }
+        setIsEqualTime(false);
         setGuardsView(calculateGuards(persons, startDate, endDate, guardTime, minuteHour, isRandom));
     }
 
@@ -191,24 +193,14 @@ const Form = () => {
                             ))}
                         </div>
                     }
-                    <div>
-                        <Button variant="contained" className={classesButton.margin} className="randonGuard" size="small" onClick={(e) => calculatePersonsEvenTime(false)}> לפי הסדר חשב זמן שווה עבור כולם</Button>
-                        <Button variant="contained" className={classesButton.margin} className="randonGuard" size="small" onClick={(e) => calculatePersonsEvenTime(true)}>  סדר רנדומלי חשב זמן שווה עבור כולם</Button>
-                        <GuardTime
-                            value={guardTime}
-                            onChange={(e) => setGuardTime(e.target.value)}
-                            minuteHour={minuteHour.toUpperCase()}
-                            value1={minuteHour}
-                            onChange1={(e) => handleChange(e)}
+                    <div className="marginTop">
+                        <ControlledAccordions
+                            calculatePersonsEvenTime={calculatePersonsEvenTime}
+                            guardTime={guardTime}
+                            setGuardTime={setGuardTime}
+                            minuteHour={minuteHour}
+                            calculatePersons={calculatePersons}
                         />
-                    </div>
-                    <div className="CalculateButton">
-                        <Button variant="contained" className={classesButton.margin} className="randonGuard" size="small" onClick={(e) => calculatePersons(true)} >
-                            חשב שמירות רנדומלי
-                    </Button>
-                        <Button variant="contained" className={classesButton.margin} size="small" onClick={(e) => calculatePersons(false)} >
-                            חשב שמירות לפי סדר
-                    </Button>
                     </div>
                 </form>
             </div>
@@ -218,12 +210,17 @@ const Form = () => {
                         <hr />
                         <div>
                             <div className="row">
-                                <Button variant="contained" className={classesButton.margin} onClick={(e) => calculatePersons(true)} endIcon={<ExposureIcon style={{ marginRight: "5px" }}></ExposureIcon>} >
-                                    הגרל שוב
-                                </Button>
+                                {isEqualTime ?
+                                    < Button variant="contained" className={classesButton.margin} onClick={(e) => calculatePersonsEvenTime(true)} endIcon={<ExposureIcon style={{ marginRight: "5px" }}></ExposureIcon>} >
+                                        הגרל שוב זמן שווה
+                                    </Button>
+                                    :
+                                    < Button variant="contained" className={classesButton.margin} onClick={(e) => calculatePersons(true)} endIcon={<ExposureIcon style={{ marginRight: "5px" }}></ExposureIcon>} >
+                                        הגרל שוב
+                                    </Button>
+                                }
                                 <Button
                                     endIcon={<RefreshIcon style={{ marginRight: "5px" }}></RefreshIcon>}
-                                    RefreshIcon
                                     style={{ margin: "5px" }}
                                     onClick={() => window.location.reload(false)}
                                     color="#e0e0e0"

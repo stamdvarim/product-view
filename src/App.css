@@ -52,3 +52,9 @@ html {
 .randonGuard {
   margin-left: 10px !important;
 }
+.marginTop {
+  margin-top: 10px;
+}
+.marginBottom {
+  margin-bottom: 10px;
+}
