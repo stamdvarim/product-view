@@ -1,24 +1,53 @@
 {
-  "name": "shmirot-mono-repo",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@date-io/date-fns": "^2.10.6",
+    "@material-ui/core": "^4.11.2",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/pickers": "^3.2.10",
+    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/react": "^11.2.2",
+    "@testing-library/user-event": "^12.6.0",
+    "chroma-js": "^2.1.0",
+    "date-fns": "^2.16.1",
+    "express": "^4.17.1",
+    "jss-rtl": "^0.3.0",
+    "material-ui-popup-state": "^1.7.1",
+    "moment": "^2.29.1",
+    "react": "^17.0.1",
+    "react-date-picker": "^8.0.6",
+    "react-datetime": "^3.0.4",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.1",
+    "react-select": "^3.1.1",
+    "react-share": "^4.3.1",
+    "web-vitals": "^0.2.4"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd client && npm i && npm run build && cd ../server && npm i && npm start"
+    "start": "npm run build && node server.js",
+    "start-dev": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/RonIsraeli123/shmirot-font.git"
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/RonIsraeli123/shmirot-font/issues"
-  },
-  "homepage": "https://github.com/RonIsraeli123/shmirot-font#readme",
-  "devDependencies": {
-    "concurrently": "^5.3.0"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
