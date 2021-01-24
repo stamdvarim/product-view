@@ -55,8 +55,8 @@ export const ControlledAccordions = (props) => {
                 </AccordionSummary>
                 <AccordionDetails>
                     <div className="row marginTop">
-                        <Button variant="contained" className={classesButton.margin} className="randonGuard" size="small" onClick={(e) => calculatePersonsEvenTime(true)}>רנדומלי</Button>
-                        <Button variant="contained" className={classesButton.margin} className="randonGuard" size="small" onClick={(e) => calculatePersonsEvenTime(false)}>לפי הסדר</Button>
+                        <Button variant="contained" className={classesButton.margin} className="randonGuard" size="small" onClick={(e) => calculatePersonsEvenTime(true)}>סדר רנדומלי</Button>
+                        <Button variant="contained" className={classesButton.margin} className="randonGuard" size="small" onClick={(e) => calculatePersonsEvenTime(false)}>סדר לפי הכנסה</Button>
                     </div>
                 </AccordionDetails>
             </Accordion>
@@ -78,10 +78,10 @@ export const ControlledAccordions = (props) => {
                     />
                     <div className="CalculateButton">
                         <Button variant="contained" className={classesButton.margin} className="randonGuard" size="small" onClick={(e) => calculatePersons(true)} >
-                            רנדומלי
+                            סדר רנדומלי
                             </Button>
                         <Button variant="contained" className={classesButton.margin} size="small" onClick={(e) => calculatePersons(false)} >
-                            לפי סדר
+                            סדר לפי הכנסה
                              </Button>
                     </div>
                 </AccordionDetails>
