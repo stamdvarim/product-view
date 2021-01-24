@@ -1,5 +1,3 @@
-//to do - 
-// 1) send on whatsapp  2) styile
 import React, { useState } from 'react';
 //algo
 import { calculateGuards } from '../algo/calculator';
@@ -18,6 +16,8 @@ import { GuardTime } from './GuardTime';
 import Table from './Table';
 import { Typography } from '@material-ui/core';
 import ShareButton from './ShareButton';
+import moment from 'moment';
+
 //..............................................................................................
 //setting Time
 //..............................................................................................
@@ -103,6 +103,28 @@ const Form = () => {
     }
 
     //claculate list of persons after adding...
+    const calculatePersonsEvenTime = (isRandom) => {
+        if (startDate === "" || endDate === "") {
+            return alert("יש להכניס תאריך התחלה ותאריך סיום");
+        }
+        if (persons.length <= 1) {
+            return alert("יש להכניס לפחות 2 שומרים");
+        }
+        if (startDate >= endDate) {
+            return alert("זמן סוף השמירה חייב להיות גדול מזמן התחלת השמירה");
+        }
+        const countGuards = persons.length;
+        console.log(countGuards, "countGuards");
+        const sumTime = moment(endDate).diff(moment(startDate), minuteHour);
+        console.log(sumTime, "sumTime");
+        const evenguardTime = Math.floor(sumTime / countGuards);
+        console.log(evenguardTime, "evenguardTime", evenguardTime / 60, "evenguardTime in houers");
+        if (evenguardTime > (6 * 60)) {
+            alert("זמן השמירה עבור כל אחד גדול מ6 שעות, אולי תרצה לקבוע זמן שמירה ?");
+        }
+        setGuardsView(calculateGuards(persons, startDate, endDate, evenguardTime, minuteHour, isRandom));
+    }
+
     const calculatePersons = (isRandom) => {
         if (startDate === "" || endDate === "") {
             return alert("יש להכניס תאריך התחלה ותאריך סיום");
@@ -170,6 +192,8 @@ const Form = () => {
                         </div>
                     }
                     <div>
+                        <Button variant="contained" className={classesButton.margin} className="randonGuard" size="small" onClick={(e) => calculatePersonsEvenTime(false)}> לפי הסדר חשב זמן שווה עבור כולם</Button>
+                        <Button variant="contained" className={classesButton.margin} className="randonGuard" size="small" onClick={(e) => calculatePersonsEvenTime(true)}>  סדר רנדומלי חשב זמן שווה עבור כולם</Button>
                         <GuardTime
                             value={guardTime}
                             onChange={(e) => setGuardTime(e.target.value)}
@@ -179,7 +203,7 @@ const Form = () => {
                         />
                     </div>
                     <div className="CalculateButton">
-                        <Button variant="contained" className={classesButton.margin} size="small" onClick={(e) => calculatePersons(true)} >
+                        <Button variant="contained" className={classesButton.margin} className="randonGuard" size="small" onClick={(e) => calculatePersons(true)} >
                             חשב שמירות רנדומלי
                     </Button>
                         <Button variant="contained" className={classesButton.margin} size="small" onClick={(e) => calculatePersons(false)} >

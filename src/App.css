@@ -49,3 +49,6 @@ html {
 .MuiInputBase-input {
   text-align: right;
 }
+.randonGuard {
+  margin-left: 10px !important;
+}

@@ -44,6 +44,3 @@ export const calculateGuards = (personsNames, givenStartTime, givenEndTime, guar
     }
     return guards;
 }
-
-
-
