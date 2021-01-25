@@ -181,7 +181,7 @@ const Form = () => {
                                     <Chip
                                         className=""
                                         size="small"
-                                        label={`${index + 1}) ${name}`}
+                                        label={`(${index + 1}) ${name}`}
                                         onDelete={() => deletePerson(index)}
                                         color="default"
                                     />
