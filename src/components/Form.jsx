@@ -27,8 +27,8 @@ const date = now.getDate().toString().length === 1 ? '0' + (now.getDate()).toStr
 const hours = now.getHours().toString().length === 1 ? '0' + now.getHours().toString() : now.getHours();
 const minutes = now.getMinutes().toString().length === 1 ? '0' + now.getMinutes().toString() : now.getMinutes();
 const formattedDateTime = year + '-' + month + '-' + date + 'T' + hours + ':' + minutes;
-const hoursEnd = (now.getHours() + 1).toString().length === 1 ? '0' + (now.getHours() + 1).toString() : now.getHours() + 1;
-const formattedDateTimeEnd = year + '-' + month + '-' + date + 'T' + hoursEnd + ':' + minutes;
+const dateEnd = (now.getDate() + 1).toString().length === 1 ? '0' + (now.getDate() + 1).toString() : now.getDate() + 1;
+const formattedDateTimeEnd = year + '-' + month + '-' + dateEnd + 'T' + hours + ':' + minutes;
 
 const Form = () => {
 
