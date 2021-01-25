@@ -12,7 +12,8 @@ const GuardsTable = (props) => {
         table: {
             maxWidth: 650,
             backgroundColor: 'white',
-            margin: '0 auto'
+            margin: '0 auto',
+            marginBottom: '1em'
         },
     });
 

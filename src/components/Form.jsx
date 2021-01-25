@@ -196,6 +196,7 @@ const Form = () => {
                             setGuardTime={setGuardTime}
                             minuteHour={minuteHour}
                             calculatePersons={calculatePersons}
+                            setMinuteHour={setMinuteHour}
                         />
                     </div>
                 </form>

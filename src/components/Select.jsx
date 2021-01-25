@@ -3,6 +3,8 @@ import Selector from 'react-select';
 
 export const Select = (props) => {
 
+    const { setMinuteHour } = props;
+
     const [options] = useState([
         { value: 'hour', label: 'שעות' },
         { value: 'minute', label: 'דקות' },
@@ -12,8 +14,8 @@ export const Select = (props) => {
         <Selector
             className="select"
             placeholder={props.minuteHour === "HOUR" ? "שעות" : "דקות"}
-            value={props.value}
-            onChange={(e) => { props.onChange(e) }}
+            value={props.value.value}
+            onChange={(e) => setMinuteHour(e.value)}
             options={options}
             defaultValue={options[0]}
         />

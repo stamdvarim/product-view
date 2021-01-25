@@ -6,6 +6,8 @@ import { Select } from './Select';
 
 export const GuardTime = (props) => {
 
+    const { setMinuteHour } = props;
+
     return (
         <div className="row">
             <Grid container spacing={1} alignItems="flex-end" className="row">
@@ -15,9 +17,9 @@ export const GuardTime = (props) => {
 
             </Grid>
             <Select
+                setMinuteHour={setMinuteHour}
                 minuteHour={props.minuteHour}
                 value={props.valueSelector}
-                onChange={(e) => props.onChangeSelector(e)}
             />
         </div>
 

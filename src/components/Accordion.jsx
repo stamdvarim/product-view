@@ -34,7 +34,7 @@ const useStylesButton = makeStyles((theme) => ({
 
 export const ControlledAccordions = (props) => {
 
-    const { calculatePersonsEvenTime, guardTime, setGuardTime, minuteHour, calculatePersons } = props;
+    const { calculatePersonsEvenTime, guardTime, setGuardTime, minuteHour, calculatePersons, setMinuteHour } = props;
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
     const classesButton = useStylesButton();
@@ -72,9 +72,9 @@ export const ControlledAccordions = (props) => {
                     <GuardTime
                         valueGuardTime={guardTime}
                         onChangeGuardTime={(e) => setGuardTime(e.target.value)}
-                        minuteHour={minuteHour.toUpperCase()}
+                        minuteHour={minuteHour}
                         valueSelector={minuteHour}
-                        onChangeSelector={(e) => handleChange(e)}
+                        setMinuteHour={setMinuteHour}
                     />
                     <div className="CalculateButton">
                         <Button variant="contained" className={classesButton.margin} className="randonGuard" size="small" onClick={(e) => calculatePersons(true)} >
