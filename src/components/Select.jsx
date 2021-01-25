@@ -10,14 +10,16 @@ export const Select = (props) => {
         { value: 'minute', label: 'דקות' },
     ]);
 
+    console.log(props.minuteHour)
+
     return (
         <Selector
             className="select"
-            placeholder={props.minuteHour === "HOUR" ? "שעות" : "דקות"}
+            placeholder={props.minuteHour === "hour" ? 'שעות' : 'דקות'}
             value={props.value.value}
             onChange={(e) => setMinuteHour(e.value)}
             options={options}
-            defaultValue={options[0]}
+            defaultValue={options[1]}
         />
     )
 }
