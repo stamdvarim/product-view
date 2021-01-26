@@ -65,7 +65,6 @@ const Form = () => {
     //function
     //..............................................................................................
 
-
     //track person name
     const onChangePersonName = (e) => {
         setCurrentPersonName(e.target.value);
